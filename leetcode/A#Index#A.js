@@ -1,6 +1,6 @@
 /*****************
-*******Index******
-*****************/
+ *******Index******
+ *****************/
 
 /*
 Number                Name
@@ -21,4 +21,7 @@ Number                Name
 #015
 #016
 #017        Letter Combinations of a Phone Number
+
+#024        Swap Nodes in Pairs
+#025        Reverse Nodes in k-Group
 */
