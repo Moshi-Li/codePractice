@@ -26,4 +26,8 @@ Number                Name
 #023        Merge k Sorted Lists
 #024        Swap Nodes in Pairs
 #025        Reverse Nodes in k-Group
+#030        Substring with Concatenation of All Words
+#032        Longest Valid Parentheses
+#033        Search in Rotated Sorted Array
+#034        Find First and Last Position of Element in Sorted Array
 */
