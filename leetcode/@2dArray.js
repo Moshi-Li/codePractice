@@ -1,0 +1,1 @@
+Array.from(Array(2), () => new Array(4));
