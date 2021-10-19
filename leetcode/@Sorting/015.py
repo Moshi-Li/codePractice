@@ -1,45 +1,36 @@
+
+
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
-        def getSum(nums: list[int], target: int, count: int) -> list[list[int]]:
-            nums.sort()
-            if(count == 2):
-                result = []
-                leftP = 0
-                rightP = len(nums)-1
-                hashMap = {}
-
-                while rightP > leftP:
-                    if(nums[leftP]+nums[rightP] == target):
-                        if(not hashMap.get(nums[leftP]) and not hashMap.get(nums[rightP])):
-                            result.append([nums[leftP], nums[rightP]])
-                            hashMap[nums[leftP]] = hashMap[nums[rightP]] = True
-                        leftP += 1
-                    elif(nums[leftP]+nums[rightP] > target):
-                        rightP -= 1
-                    else:
-                        leftP += 1
-                return result
-
+        def twoSum(nums, index, target):
+            l = index + 1
+            r = len(nums)-1
             result = []
-
-            for index in range(len(nums)):
-                matches = getSum(nums[:index] +
-                                 nums[index+1:], target-nums[index], count-1)
-                for item in matches:
-                    item.append(nums[index])
-
-                hashMap = {}
-                hashMap[index] = True
-                result += matches
-
             hashMap = {}
-            for item in result:
-                item.sort()
-                hashMap[str(item)] = item
+            while l < r:
+                if nums[l] + nums[r] < target or hashMap.get(nums[l]):
+                    l += 1
+                elif nums[l] + nums[r] > target or hashMap.get(nums[r]):
+                    r -= 1
+                else:
+                    result.append([nums[l], nums[r]])
+                    hashMap[nums[l]] = True
+                    hashMap[nums[r]] = True
+                    l += 1
+            return result
 
-            return list(hashMap.values())
-
-        return getSum(nums, 0, 3)
+        nums.sort()
+        result = []
+        hashMap = {}
+        for index, item in enumerate(nums):
+            if index > len(nums)-3 or hashMap.get(item):
+                hashMap[item] = True
+                continue
+            else:
+                result += list(map(lambda x: x +
+                               [item], twoSum(nums, index, -item)))
+                hashMap[item] = True
+        return result
 
 
 solution = Solution()
