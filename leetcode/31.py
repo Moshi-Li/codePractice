@@ -6,23 +6,21 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        if len(nums) <= 1:
-            return nums
-        nums.reverse()
-        index = len(nums)
-        for i in range(1, len(nums)):
-            if nums[i] < nums[i-1]:
-                indexSwap = bisect.bisect(nums, nums[i], 0, i)
+        for i in reversed(range(0, len(nums)-1)):
+            if nums[i] < nums[i+1]:
+                nums[i+1:len(nums)] = sorted(nums[i+1:len(nums)])
+                swapIndex = bisect.bisect_right(
+                    nums[i+1:len(nums)], nums[i]) + i+1
                 temp = nums[i]
-                nums[i] = nums[indexSwap]
-                nums[indexSwap] = temp
-                index = i
-                break
+                nums[i] = nums[swapIndex]
+                nums[swapIndex] = temp
 
-        tempArray = nums[:index]
-        tempArray.reverse()
-
-        for i in range(index):
-            nums[i] = tempArray[i]
+                return nums
 
         nums.reverse()
+
+        return nums
+
+
+bisect.bisect_right
+bisect.bisect_left
