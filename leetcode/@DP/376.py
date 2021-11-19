@@ -3,16 +3,19 @@ class Solution:
         if len(nums) == 0:
             return 0
 
-        count = 0
+        # Up: True
+        # Down: False
         direction = None
+        count = 0
         for i in range(1, len(nums)):
-            if nums[i-1] < nums[i] and not direction:
+            if nums[i-1] > nums[i] and (direction == True or direction == None):
                 count += 1
-                #print(f"1; {nums[i]}; c: {count}")
-                direction = True
-            elif nums[i-1] > nums[i] and (direction == True or direction == None):
-                count += 1
-                #print(f"2 {nums[i]}; c: {count}")
                 direction = False
+            elif nums[i-1] < nums[i] and (direction == False or direction == None):
+                count += 1
+                direction = True
+        return count+1
 
-        return count + 1
+
+solution = Solution()
+solution.wiggleMaxLength([100, 200])

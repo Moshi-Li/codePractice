@@ -1,27 +1,33 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        appearedLetters = {}
-        prevIndex = 0
-        currentIndex = 0
-        result = 0
-        while currentIndex < len(s):
-            if(appearedLetters.get(s[currentIndex]) != None):
-                if currentIndex - prevIndex > result:
-                    result = currentIndex - prevIndex
+        if len(s) == 0 or len(s) == 1:
+            return len(s)
 
-                currentIndex = prevIndex = appearedLetters[s[currentIndex]]+1
-                appearedLetters = {s[prevIndex]: prevIndex}
+        left = 0
+        right = 0
+        chars = list(s)
+        maxLength = 1
+        curLength = 0
+        charCount = {}
+
+        while left <= right and right < len(chars):
+
+            if left == right:
+                curLength = 1
+                charCount = {}
+                charCount[chars[left]] = 1
+                right += 1
+            elif charCount.get(chars[right]) == None or charCount.get(chars[right]) == 0:
+
+                curLength += 1
+                charCount[chars[right]] = 1
+                maxLength = max(maxLength, curLength)
+
+                right += 1
             else:
-                appearedLetters[s[currentIndex]] = currentIndex
 
-            currentIndex = currentIndex + 1
+                charCount[chars[left]] -= 1
+                left += 1
+                curLength -= 1
 
-        if currentIndex - prevIndex > result:
-            result = currentIndex - prevIndex
-
-        return result
-
-
-solution = Solution()
-r = solution.lengthOfLongestSubstring("dvdf")
-print(r)
+        return maxLength
