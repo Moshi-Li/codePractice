@@ -1,4 +1,6 @@
-[[0]*3 for i in range(3)]
+# [[0]*column for i in range(row)]
+array = [[0]*2 for i in range(3)]
+print(array)
 for index, item in enumerate([100, 200]):
     print(index)
     print(item)
