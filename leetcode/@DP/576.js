@@ -18,5 +18,3 @@ var findPaths = function (m, n, maxMove, startRow, startColumn) {
   const cache = {};
   return dfs(startRow, startColumn, maxMove);
 };
-
-console.log(findPaths(8, 50, 23, 5, 26));

@@ -1,15 +1,13 @@
 class Solution:
+    def reverse(self, pre, next):
+        if next == None:
+            return pre
+        nextNode = next.next
+        next.next = pre
+        return self.reverse(next, nextNode)
+
     def reverseList(self, head):
         if head == None:
             return None
-
-        pre = None
-        node = head
-
-        while node != None:
-            nextNode = node.next
-            node.next = pre
-            pre = node
-            node = nextNode
-
-        return pre
+        else:
+            return self.reverse(None, head)
