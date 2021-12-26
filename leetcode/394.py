@@ -1,16 +1,38 @@
 class Solution:
     def decodeString(self, s):
-        def build(self, s):
-            if s[-1] != "]":
-                return s
-            else:
-                temp = 0
-                repitation = ""
-                while temp < len(s):
-                    if s[temp] == "[":
-                        repitation = int(repitation)
-                        return "".join(repitation * [build(s[temp + 1:len(s) - 1])])
+        result = ""
+        repetition = ""
+        lock = 0
+        lockIndex = None
+        for i in range(0, len(s)):
 
-                    temp += 1
+            if s[i] == "[":
+                lock += 1
+                if lockIndex == None:
+                    lockIndex = i
+            elif s[i] == "]":
+                lock -= 1
+                if lock == 0:
 
-        return build(s)
+                    localResult = self.decodeString(s[lockIndex+1:i])
+                    lockIndex = None
+
+                    if len(repetition):
+                        repetition = int(repetition)
+                        while repetition > 0:
+                            result += localResult
+                            repetition -= 1
+                        repetition = ""
+
+            elif lock == 0:
+                if ord("0") <= ord(s[i]) <= ord("9"):
+                    repetition += s[i]
+                else:
+                    result += s[i]
+
+        return result
+
+
+s = Solution()
+r = s.decodeString("3[a2[c]]")
+print(r)
