@@ -1,18 +1,32 @@
 /**
- * @param {string} s
- * @param {string} goal
- * @return {boolean}
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
  */
-var rotateString = function (s, goal) {
-  if (s.length !== goal.length) return false;
-  let result = false;
-  s.split("").every((char, index) => {
-    if (`${s.slice(index)}${s.slice(0, index)}` === goal) {
-      result = true;
-      return false;
-    }
-    return true;
+
+var deleteDuplicatesUnsorted = function (head) {
+  const map = {};
+  let arr = [];
+  let pointer = head;
+  while (pointer !== null) {
+    if (!map[pointer.val]) map[pointer.val] = 0;
+    map[pointer.val]++;
+    arr.push(pointer);
+    pointer = pointer.next;
+  }
+
+  arr = arr.filter((node) => {
+    return map[node.val] <= 1;
   });
-  return result;
+
+  arr.forEach((node, index) => {
+    if (index < arr.length - 1) node.next = arr[index + 1];
+    else {
+      node.next = null;
+    }
+  });
+
+  return arr.length ? arr[0] : null;
 };
-console.log(rotateString("abcd", "cdeab"));
